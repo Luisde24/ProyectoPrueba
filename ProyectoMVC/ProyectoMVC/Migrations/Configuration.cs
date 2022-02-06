@@ -28,14 +28,14 @@ namespace ProyectoMVC.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            var passwordHash = new PasswordHasher();
+            var passwordHash = new PasswordHasher();  //una clase proporcionada por identity 
             string password = passwordHash.HashPassword("Ss123*");
-            context.Users.AddOrUpdate(u => u.UserName,
+            context.Users.AddOrUpdate(u => u.UserName, //se inserta el nombre dle usuario con AddOrUpdate
             new ApplicationUser
             {
                 UserName = "admin@rol.com",
                 PasswordHash = password,
-                SecurityStamp = Guid.NewGuid().ToString()
+                SecurityStamp = Guid.NewGuid().ToString()  // Se compleat el campo de SecurityStamp para que al incluir el usuario o clave permita el acceso. 
             });
         }
     }

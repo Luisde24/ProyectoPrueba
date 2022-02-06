@@ -10,7 +10,7 @@ namespace AplicacionWebApi.Controllers
         public static string GenerateTokenJwt(string username)
         {
             // appsetting for Token JWT
-            var secretKey = ConfigurationManager.AppSettings["JWT_SECRET_KEY"];
+            var secretKey = ConfigurationManager.AppSettings["JWT_SECRET_KEY"]; 
             var audienceToken = ConfigurationManager.AppSettings["JWT_AUDIENCE_TOKEN"];
             var issuerToken = ConfigurationManager.AppSettings["JWT_ISSUER_TOKEN"];
             var expireTime = ConfigurationManager.AppSettings["JWT_EXPIRE_MINUTES"];

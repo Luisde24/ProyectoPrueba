@@ -1,0 +1,6 @@
+BadRequest --es un error tipo 400 donde la URL es incorrecta.
+HttpNotFound() -- es una instancea donde se define que no se encontro el recurso. 
+ApiController: es una interfaz que se utiliza para manejar solicitudes Api. 
+DataSet contenedor de un cojunto de datos. 
+JWT es un estadar para transmitir informacion de identidad de un usuario de forma segura entre cliente /servidor.
+se compone de header(ENCABEZADO), payload y una firma(SIGNATURE es la llave secreta ) 

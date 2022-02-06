@@ -11,6 +11,7 @@ using ProyectoMVC.Models.DBContext;
 
 namespace ProyectoMVC.Controllers
 {
+    [Authorize]
     public class ContratoController : Controller
     {
         private EmpleadosDbContext db = new EmpleadosDbContext();
@@ -45,8 +46,6 @@ namespace ProyectoMVC.Controllers
         }
 
         // POST: Contrato/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ContratoId,NombreEntidad,NumeroContrato,TrabajadorVinculado,FechaInicio,FechaFin,TrabajadorId")] Contratos contratos)
@@ -79,8 +78,6 @@ namespace ProyectoMVC.Controllers
         }
 
         // POST: Contrato/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ContratoId,NombreEntidad,NumeroContrato,TrabajadorVinculado,FechaInicio,FechaFin,TrabajadorId")] Contratos contratos)

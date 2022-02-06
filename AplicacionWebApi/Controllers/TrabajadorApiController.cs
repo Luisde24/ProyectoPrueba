@@ -4,7 +4,7 @@ using System.Linq;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Http;
-
+using System.Configuration;
 
 namespace AplicacionWebApi.Controllers
 {
@@ -15,10 +15,10 @@ namespace AplicacionWebApi.Controllers
 
         #region Cadena de conexión
         /// <summary>
-        /// La cadena de conexión es para conectarse a la base de datos Examen3Herramientas3 y acceder a la info de esa base de Datos
+        /// La cadena de conexión es para conectarse a la base de datos  y acceder a la info.
         /// </summary>
         #endregion
-        public SqlConnection conexion = new SqlConnection("Server = LUIS-DAVID; Database =ProyectMVC; Integrated Security = True;");
+        string conexion = ConfigurationManager.ConnectionStrings["conexionBD"].ConnectionString;
         #region Listar tabla Trabajadores
         // GET api/Trabajador
         /// <summary>

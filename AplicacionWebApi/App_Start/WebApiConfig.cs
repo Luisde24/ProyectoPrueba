@@ -15,6 +15,7 @@ namespace AplicacionWebApi
             // Rutas de API web
             config.MapHttpAttributeRoutes();
 
+            //Se implementa una configuracion de token validation hander 
             config.MessageHandlers.Add(new TokenValidationHandler());
 
             config.Routes.MapHttpRoute(

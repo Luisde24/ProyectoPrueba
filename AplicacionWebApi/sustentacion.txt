@@ -1,0 +1,116 @@
+Muy buenas tardes,
+
+PROYECTO MVC
+
+Al crear un proyecto MVC con autenticación, por defecto se crea la estructura del proyecto 
+con los modelos, controladores y configuraciones relaciones con la creación usuario, roles y sesiones.
+
+IdentityConfig 
+Nos ayuda a manejar la autenticación de un usuario 
+
+extra: n  
+Todo el manejo esta configurado, pero se puede modificar el manejo, 
+si un usuario se bloquea, registro de la contraseña, entre otras mas.
+
+
+IdentityFramework es el ORM que permite mapear los datos a tablas por medio de code firs o mapear datos con bd y tablas contruidas database firts
+Identity es el conjunto de clases que maneja .net framework para el manejo de usuarios, roles y sesiones.
+
+Controladores
+
+AccountControler
+Tiene todo lo necesario para agregar la cuenta del usuario (registrar un usuario, Loguearse, desloguearse, verificar cuenta, cambiar la contraseña )
+
+ManagerControler 
+hace referencia a lo que  la aplicacion hace por el usuario, recuperar una contraseña, enviar con codigo al celular o email par verificar o modificar la contraseña, saber cual es el usuario que esta logueado en el momento 
+
+Modelos 
+- identity se relaciona con la cadena de connexion donde se almacena la informacion del usuario.  
+- Managger y account tienes todas las clases para todo lo que necesita hacer con el acceso del usuario. 
+
+RELACIONADO CON LO QUE HICE.
+MODELOS
+
+ 
+El modelo tipo de documento se crea para que el usuario no tenga que escribir su número de documento, ya que hay varias manera de hacerlo para no caer en un error. Sino que el lo pueda selesccionar segunb los tipós existente.
+En cada modelo tiene sus diferentes atributos con sus anotaciones, para que al momento de migrarlos se cree con esas especificaciones dadas en cada anotación.
+
+Tambien se crea una carpeta llamada DBContext para guardar la clase heredada de DbContext para mapear los modelos o clases que se convertiran en tablas.
+
+CONTROLADORES 
+
+Se crearon tres controladores: Trabajadores, TipoDeDocumento y Contratos.
+
+Cada controlador tiene sus respectivas vista donde se crea,  lista, se muestra el detalle, se actualiza y se elimina un registro de sus respectivo modelo. 
+
+VISTAS
+
+Las vista se crearon segun cada controlador, para visualizar los atributo de cada modelo. 
+
+MIGRACIONES 
+
+Al habilitar las migraciones se crea una clase llamada configuraciones donde se almacena en el seed 
+el usuario que yo desee como administrador por defecto usando linq entity 
+
+Lo único que necesitamos es realizar manualmente el Hash de la contraseña. El ASP .NET Identity nos proporciona la clase PasswordHasher para crear un password hash de la contraseña dada como string. Finalmente se inserta el usuario usando el metodo AddorUpdate.
+
+Importante completar el campo SecurityStamp, ya que sino en el momento de hacer el login el sistema denegará automáticamente el acceso.
+y envia la migracion o se actualiza en la ultima migracion. 
+
+
+API WEBB 
+
+Al crear un proyecto de API web arquitectura restfull se crea la estructura del proyecto con las carpeta similar aL 
+PROYECTO mvc, la diferencia esta en que esta aruitectura maneja una carpeta llamada area donde se me pueden hacer microproyectos MVC.
+
+Controladores
+
+Se crearon 5 controladores  TrabajadorApi, ContratoApi, Login, TokenValidation, Tokengenerador que heredan de ApiController 
+
+Los controladores TrabajadorApi y ContratoApi tiene una estructura similar, para poder acceder a las dos se deben autenticar por medio de un token,
+tambien estan documentadas, contiene la cadena de conexión, contiene los metodos GET, POST, PUT, DELETE para la busqueda de datos, el envio, la actualización y eliminacion.
+
+ciclo de vidad del JWT 
+Cuando requieren consumir el servicio sin autenticacion, no se le va permitir ingreso,
+va a salir un error informando que el servicio es denegado.
+
+Tokengenerador
+1. en esta clase tenemos la llave secreta con las que se va a firmar el toquen.
+2 y 3. quien nos puede llegar a consumir para tener un control
+4. el tiempo en que va a expirar el token en minutos
+
+Se crea una llave secreta basada en el secret key
+se crean las credenciales basadas en la llave simetrica y el algoritmo que estamos utilizando
+
+Es la informacion cliente que se desea guardar en el payLoad, en nuestro caso utilizamos los cleamsIdentity,
+se va guardar en este caso solo el nombre
+
+Cada vez que se lance la peticion debe hacer la validacion antes de entrar al servicio rest
+hace la invocacion de jwt.
+
+Aqui esta haciendo la estructura de el jwt 
+se crea el jwt 
+la audiencia que nos puede llegar a consumir para tener un control,
+el payload que es el subject 
+fecha expiracion o vigencia en formato UTC por meridiano 
+
+se contruye el token y se devuelve en un string json 
+
+TokenValidation
+
+Recibe una autenticacion bearer : valida que venga con una autorizacion y con el bearer, 
+valida que traiga algo valor 
+
+Se valida la vigencia del token y nos dice si ha espirado o no 
+
+Aca esta el metodo principal recibe la peticion, valida la estructura del token,
+si no hay autorizacion laza un StatusCour que no esta autorizado 
+
+Para verificar la firma se toman las variables con que los genere, se obtiene la validacion de esos parametros,
+y nos dice si el token es valido segun la estructura, parametros que hemos definidos y secret key que nosotros firmamos el token,
+Si coincide nos dira el token es valido, se genero por nuestro backed y no ha sido alterado 
+
+
+Para que se ejecute al lazar la peticion, vamos a nuestro web api config y utilizamos los TokenValidation hander 
+
+

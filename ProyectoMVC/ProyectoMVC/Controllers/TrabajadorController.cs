@@ -11,6 +11,7 @@ using ProyectoMVC.Models.DBContext;
 
 namespace ProyectoMVC.Controllers
 {
+    [Authorize]
     public class TrabajadorController : Controller
     {
         private EmpleadosDbContext db = new EmpleadosDbContext();
@@ -20,6 +21,8 @@ namespace ProyectoMVC.Controllers
         {
             var trabajador = db.Trabajador.Include(t => t.TipoIdentificacion);
             return View(trabajador.ToList());
+
+
         }
 
         // GET: Trabajador/Details/5
@@ -129,5 +132,7 @@ namespace ProyectoMVC.Controllers
             }
             base.Dispose(disposing);
         }
+        
+        
     }
 }
