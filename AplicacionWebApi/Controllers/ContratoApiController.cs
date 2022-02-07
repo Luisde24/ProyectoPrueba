@@ -18,7 +18,9 @@ namespace AplicacionWebApi.Controllers
         /// La cadena de conexión es para conectarse a la base de datos Examen3Herramientas3 y acceder a la info de esa base de Datos
         /// </summary>
         #endregion
-        string conexion = ConfigurationManager.ConnectionStrings["conexionBD"].ConnectionString;
+        
+            SqlConnection conexion = new SqlConnection (ConfigurationManager.ConnectionStrings["conexionBD"].ConnectionString);
+        
 
         #region Listar tabla contratos
         //   GET: api/Contrato

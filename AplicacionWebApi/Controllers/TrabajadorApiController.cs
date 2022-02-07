@@ -18,7 +18,7 @@ namespace AplicacionWebApi.Controllers
         /// La cadena de conexión es para conectarse a la base de datos  y acceder a la info.
         /// </summary>
         #endregion
-        string conexion = ConfigurationManager.ConnectionStrings["conexionBD"].ConnectionString;
+        SqlConnection conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["conexionBD"].ConnectionString);
         #region Listar tabla Trabajadores
         // GET api/Trabajador
         /// <summary>
